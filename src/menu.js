@@ -1,61 +1,57 @@
-function Menu(options) {
-  var elem;
-
-  function getElem() {
-    if (!elem) render();
-    return elem;
+class Menu {
+  
+  constructor (options) {
+    this._options = options;
+  }
+  
+  getElem() {
+    if (!this.elem) this.render();
+    return this.elem;
   }
 
-  function render() {
-    elem = document.createElement('div');
-    elem.className = "menu";
+  render() {
+    this.elem = document.createElement('div');
+    this.elem.className = "menu";
 
-    var titleElem = document.createElement('span');
-    elem.appendChild(titleElem);
+    const titleElem = document.createElement('span');
+    this.elem.appendChild(titleElem);
     titleElem.className = "title";
-    titleElem.textContent = options.title;
+    titleElem.textContent = this._options.title;
 
-    elem.onmousedown = function() {
-      return false;
-    };
+    this.elem.onmousedown = () => false;
 
-    elem.onclick = function(event) {
+    this.elem.onclick = event => {
       if (event.target.closest('.title')) {
-        toggle();
+        this.toggle();
       }
     }
 
   }
 
-  function renderItems() {
-    var items = options.items || [];
-    var list = document.createElement('ul');
-    items.forEach(function(item) {
-      var li = document.createElement('li');
+  renderItems() {
+    const items = this._options.items || [];
+    const list = document.createElement('ul');
+    items.forEach(item => {
+      const li = document.createElement('li');
       li.textContent = item;
       list.appendChild(li);
     });
-    elem.appendChild(list);
+    this.elem.appendChild(list);
   }
 
-  function open() {
-    if (!elem.querySelector('ul')) {
-      renderItems();
+  open() {
+    if (!this.elem.querySelector('ul')) {
+      this.renderItems();
     }
-    elem.classList.add('open');
+    this.elem.classList.add('open');
   };
 
-  function close() {
-    elem.classList.remove('open');
+  close() {
+    this.elem.classList.remove('open');
   };
 
-  function toggle() {
-    if (elem.classList.contains('open')) close();
-    else open();
+  toggle() {
+    if (this.elem.classList.contains('open')) this.close();
+    else this.open();
   };
-
-  this.getElem = getElem;
-  this.toggle = toggle;
-  this.close = close;
-  this.open = open;
 }
