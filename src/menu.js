@@ -10,10 +10,10 @@ class Menu {
   }
 
   render() {
-    this.elem = document.createElement('div');
+    this.elem = document.createElement("div");
     this.elem.className = "menu";
 
-    const titleElem = document.createElement('span');
+    const titleElem = document.createElement("span");
     this.elem.appendChild(titleElem);
     titleElem.className = "title";
     titleElem.textContent = this._options.title;
@@ -21,7 +21,7 @@ class Menu {
     this.elem.onmousedown = () => false;
 
     this.elem.onclick = event => {
-      if (event.target.closest('.title')) {
+      if (event.target.closest(".title")) {
         this.toggle();
       }
     }
@@ -30,9 +30,9 @@ class Menu {
 
   renderItems() {
     const items = this._options.items || [];
-    const list = document.createElement('ul');
+    const list = document.createElement("ul");
     items.forEach(item => {
-      const li = document.createElement('li');
+      const li = document.createElement("li");
       li.textContent = item;
       list.appendChild(li);
     });
@@ -40,18 +40,18 @@ class Menu {
   }
 
   open() {
-    if (!this.elem.querySelector('ul')) {
+    if (!this.elem.querySelector("ul")) {
       this.renderItems();
     }
-    this.elem.classList.add('open');
+    this.elem.classList.add("open");
   };
 
   close() {
-    this.elem.classList.remove('open');
+    this.elem.classList.remove("open");
   };
 
   toggle() {
-    if (this.elem.classList.contains('open')) this.close();
+    if (this.elem.classList.contains("open")) this.close();
     else this.open();
   };
 }
